@@ -1,13 +1,18 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 const PORT = 3000
+const path = require('path')
+
+// Middleware to parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     console.log("usernames will be logged here - wip")
 })
 
-app.get('/new', (req, res, next) => {
-    next()
+app.get('/new', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'form.html'))
 })
 
 app.post('/new', (req, res) => {
