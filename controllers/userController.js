@@ -4,8 +4,9 @@ const db = require('../db/queries')
 // Function to handle getting all usernames
 
 async function getAllUsernames(req, res) {
+    const { search } = req.query
     try {
-        const usernames = await db.getAllUserNames()
+        const usernames = await db.getAllUserNames(search)
         console.log("Usernames: ", usernames);
         res.send("Usernames: " + usernames.map(user => user.username).join(", "))
     } catch (error) {
