@@ -28,7 +28,18 @@ async function addUsername(req, res) {
     }
 }
 
+async function deleteAllUsers(req, res) {
+    try {
+        const deletedCount = await db.deleteAllUsers()
+        res.send(`Deleted all users: ${deletedCount} user(s) removed`)
+    } catch (error) {
+        console.error('Error deleting all users:', error);
+        res.status(500).send('Failed to delete all users');
+    }
+}
+
 module.exports = {
     getAllUsernames,
-    addUsername
+    addUsername,
+    deleteAllUsers
 };
